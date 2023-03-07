@@ -1,0 +1,25 @@
+name: CSS Compression
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: npm install clean-css-cli -g
+      - name: Compress CSS
+        run: cleancss -o index.min.css index.css
+      - name: Commit Changes
+        run: |
+          git config --local user.email "imevlud@gmail.com"
+          git config --local user.name "Mavludin"
+          git add index.min.css
+          git commit -m "Compressed CSS"
+      - name: Push Changes
+        uses: ad-m/github-push-action@main
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
