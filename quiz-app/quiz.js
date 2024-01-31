@@ -5,6 +5,7 @@ const aside_counter = document.querySelector("#aside-counter > h3 > span");
 const btn_submit = document.querySelector("#btn-submit");
 const modal_wrapper = document.querySelector("#modal-wrapper");
 const result_modal = document.querySelector("#result-modal > h3");
+const backdrop = document.querySelector("#backdrop");
 
 async function getResponse() {
   let response = await fetch(questionsAPI);
@@ -41,6 +42,10 @@ async function getResponse() {
     e.preventDefault();
     result_modal.innerHTML = `Ваш результат: ${score}`;
     modal_wrapper.style.display = "block";
+  });
+
+  backdrop.addEventListener("click", (e) => {
+    modal_wrapper.style.display = "none";
   });
 }
 
